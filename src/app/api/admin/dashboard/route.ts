@@ -1,8 +1,9 @@
 
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse, connection } from "next/server";
 import { authorizeRoles } from "@/lib/authorization";
 
 export async function GET(request: NextRequest) {
+  await connection();
   try {
     const auth = await authorizeRoles(request, ["admin"]);
 

@@ -1,8 +1,12 @@
-import { NextResponse } from "next/server";
+
+import { NextResponse, connection } from "next/server";
 import mongoose from "mongoose";
 import { connectDB } from "@/lib/db";
 
 export async function GET() {
+  // Prevent this route from executing during build-time prerendering.
+  await connection();
+
   try {
     await connectDB();
     await mongoose.connection.db?.admin().ping();

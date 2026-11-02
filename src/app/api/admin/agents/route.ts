@@ -1,5 +1,5 @@
 
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse, connection } from "next/server";
 import { authorizeRoles } from "@/lib/authorization";
 import { connectDB } from "@/lib/db";
 import User from "@/models/User";
@@ -7,6 +7,8 @@ import User from "@/models/User";
 const allowedStatuses = ["pending", "approved", "rejected", "all"];
 
 export async function GET(request: NextRequest) {
+  await connection();
+
   try {
     const auth = await authorizeRoles(request, ["admin"]);
 

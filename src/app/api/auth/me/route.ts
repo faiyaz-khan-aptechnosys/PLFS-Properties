@@ -1,8 +1,10 @@
 
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse, connection } from "next/server";
 import { getAuthenticatedUser } from "@/lib/auth";
 
 export async function GET(request: NextRequest) {
+  await connection();
+
   try {
     const auth = await getAuthenticatedUser(request);
 

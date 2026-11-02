@@ -7,7 +7,6 @@ type MongooseCache = {
 };
 
 declare global {
-  // eslint-disable-next-line no-var
   var mongooseCache: MongooseCache | undefined;
 }
 
@@ -20,9 +19,7 @@ export async function connectDB() {
   const MONGODB_URI = process.env.MONGODB_URI;
 
   if (!MONGODB_URI) {
-    throw new Error(
-      "Please define MONGODB_URI in your .env.local file"
-    );
+    throw new Error("Please define MONGODB_URI in your environment variables");
   }
 
   if (cached.conn) {
